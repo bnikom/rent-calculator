@@ -1,11 +1,11 @@
 import "./App.scss";
-import SqFootage from "./components/SqFootage";
+import ApartmentSize from "./components/ApartmentSize";
 
 function App() {
   return (
     <div className="App">
-      <h1>Rent Calculator</h1>
-      <SqFootage />
+      <h1>What is Your Share of the Rent?</h1>
+      <ApartmentSize />
     </div>
   );
 }
