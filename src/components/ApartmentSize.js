@@ -120,7 +120,7 @@ export default function ApartmentSize() {
           </button>
         </div>
         <div>
-          <input type="submit" />
+          <input type="submit" value="Submit" />
         </div>
       </form>
 
