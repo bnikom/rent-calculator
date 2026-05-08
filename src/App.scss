@@ -1,11 +1,29 @@
-@import url('https://fonts.googleapis.com/css?family=DM+Sans');
+@import url("https://fonts.googleapis.com/css?family=DM+Sans");
 
 .App {
   text-align: center;
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-family: 'DM Sans';
+  font-family: "DM Sans";
+  background: #fcec03;
+  min-height: 100vh;
+
+  .title {
+    min-width: 100vw;
+    background: #072ff7;
+    color: #fcec03;
+    margin-bottom: 15px;
+    font-family: "Chunko";
+    text-transform: uppercase;
+    font-size: 40px;
+    padding-top: 10px;
+
+    h1 {
+      font-weight: normal;
+      margin: 5px;
+    }
+  }
 }
 
 .App-logo {
@@ -43,3 +61,16 @@
   }
 }
 
+@font-face {
+  font-family: "Chunko";
+  src: url("../public/fonts/Chunko_Bold_Demo.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Wister";
+  src: url("../public/fonts/wister.demo.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}

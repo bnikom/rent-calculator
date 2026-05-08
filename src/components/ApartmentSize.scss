@@ -1,18 +1,20 @@
-
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   border-radius: 25px;
-  border: 2px solid black;
-  width: 413px;
+  border: 8px solid #072ff7;
+  min-width: 250px;
+  width: 40vw;
+  max-width: 600px;
+  min-height: 70vh;
+  color: #072ff7;
+  font-weight: bold;
 
-  .room{
-    border: 1.5px solid blue;
-    background: lightgoldenrodyellow;
+  .room {
+    border: 1.5px solid #072ff7;
     margin: 15px;
-    padding: 2rem;
+    width: 34vw;
   }
 
   .rent {
@@ -32,18 +34,21 @@ form {
     label {
       text-align: left;
       font-size: 24px;
-      margin: 2px;
+      margin: 2px 25px 2px 2px;
     }
 
     #closeButton {
       position: relative;
-      top: -20px;
-      right: -20px;
+      right: -7px;
     }
 
-    input[type="number"], input[type="text"] {
-      font-size:24px;
+    input[type="number"],
+    input[type="text"] {
+      font-size: 20px;
       float: right;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #072ff7;
     }
 
     button {
@@ -53,12 +58,13 @@ form {
       padding: 0;
       font: inherit;
       outline: inherit;
-      float: right;  
+      float: right;
       width: 1rem;
     }
 
-    #nameLabel {
-      margin-top: 17px;
+    .room-type {
+      text-transform: lowercase;
+      font-size: 18px;
     }
 
     max-width: 400px;
@@ -67,20 +73,38 @@ form {
     flex-direction: column;
   }
 
+  .space {
+    font-size: 22px;
+    text-align: left;
+  }
+
+  .room-title {
+    margin-top: 0px;
+    font-size: 18px;
+    margin-left: 2rem;
+  }
+
   input[type="submit"] {
-    font-size:24px;
+    font-size: 24px;
     box-sizing: border-box;
     margin: 10px;
     border-radius: 5px;
-    font-family: 'DM Sans';
-    border: 1.5px solid black;
+    font-family: "DM Sans";
+    border: 3px solid #072ff7;
+    margin-right: 3px;
+    background: transparent;
+    color: #072ff7;
+    cursor: pointer;
   }
 
   button {
     border-radius: 5px;
-    font-family: 'DM Sans';
-    border: 1.5px solid black;
+    font-family: "DM Sans";
+    border: 2px solid #072ff7;
     margin-right: 3px;
+    background: #072ff7;
+    color: #fcec03;
+    cursor: pointer;
   }
 
   p {
@@ -97,10 +121,14 @@ form {
 
 .results {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    div {
-  display: block;
-  text-align: left;
+  flex-direction: column;
+  align-items: center;
+  div {
+    display: block;
+    text-align: left;
+  }
 }
+
+section {
+  margin-top: 20px;
 }

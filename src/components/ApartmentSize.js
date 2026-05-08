@@ -14,7 +14,7 @@ export default function ApartmentSize() {
 
   const onSubmit = (data) => {
     const aptSqFoot = data.rooms.map((room) =>
-      calculateSqFt(room.length, room.width)
+      calculateSqFt(room.length, room.width),
     );
     const sharedSqFoot = data.rooms
       .filter((room) => room.shared)
@@ -60,7 +60,7 @@ export default function ApartmentSize() {
             <input type="number" {...register("rent", { required: true })} />
           </label>
         </fieldset>
-        <p>Apartment</p>
+        <p className="room-title">[Enter room configurations]</p>
         {indexes.map((index) => {
           const fieldName = `rooms[${index}]`;
           return (
@@ -70,21 +70,11 @@ export default function ApartmentSize() {
                   type="button"
                   id="closeButton"
                   onClick={removeRoom(index)}
+                  style={{ height: 0 }}
                 >
                   &#10006;
                 </button>
               </div>
-
-              <label>
-                Your room?
-                <input type="checkbox" {...register(`${fieldName}.yours`)} />
-              </label>
-
-              <label>
-                Shared space?
-                <input type="checkbox" {...register(`${fieldName}.shared`)} />
-              </label>
-
               <label id="nameLabel">
                 Name:
                 <input
@@ -92,7 +82,19 @@ export default function ApartmentSize() {
                   {...register(`${fieldName}.name`, { required: true })}
                 />
               </label>
+              <div className="space">Space:</div>
 
+              <div>
+                <label className="room-type">
+                  <input type="checkbox" {...register(`${fieldName}.yours`)} />
+                  Private/yours
+                </label>
+
+                <label className="room-type">
+                  <input type="checkbox" {...register(`${fieldName}.shared`)} />
+                  Shared/public
+                </label>
+              </div>
               <label>
                 Length:
                 <input
@@ -120,7 +122,7 @@ export default function ApartmentSize() {
           </button>
         </div>
         <div>
-          <input type="submit" value="Submit" />
+          <input className="submit-buttom" type="submit" value="Submit" />
         </div>
       </form>
 

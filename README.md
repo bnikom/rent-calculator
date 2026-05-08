@@ -1,5 +1,7 @@
 # rent-calculator
+
 Calculate % of rent based on sq footage of your personal and shared space in an apartment
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
