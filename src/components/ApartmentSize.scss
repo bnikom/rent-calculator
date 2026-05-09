@@ -42,7 +42,6 @@ form {
     label {
       margin: 1rem;
     }
-    max-width: 413px;
   }
 
   fieldset {
@@ -190,7 +189,6 @@ form {
 
   .border-yellow {
     width: 97%;
-    height: 100vh;
     border-radius: 25px;
     border: 8px solid #fcec03;
     text-align: left;
@@ -199,7 +197,7 @@ form {
       display: flex;
       flex-direction: column;
       /* flex-wrap: wrap; */
-      row-gap: 17px;
+      row-gap: 16px;
       .four-buttons,
       .second-buttons {
         display: flex;
@@ -209,6 +207,8 @@ form {
           border-radius: 5px;
           width: 56px;
           height: 23px;
+          border-bottom-width: 3px;
+          border-right-width: 3px;
         }
       }
 
@@ -219,6 +219,11 @@ form {
 
         &:last-of-type {
           margin-bottom: 2rem;
+        }
+      }
+      @media screen and (max-width: 930px) {
+        .four-buttons:nth-last-child(n + 3) {
+          display: none;
         }
       }
 
@@ -299,12 +304,13 @@ form {
       border: 2px solid;
       padding: 10px;
       padding-bottom: 50px;
+      font-family: "Calculator";
     }
 
     .css-typing h2 {
       border-right: 0.15em solid #fcec03;
-      font-family: "Courier";
-      font-size: 18px;
+      font-family: "Calculator";
+      font-size: 22px;
       white-space: nowrap;
       overflow: hidden;
     }
@@ -342,6 +348,8 @@ form {
     .css-typing .share {
       width: 23em;
       opacity: 0;
+      white-space: normal;
+      overflow-wrap: break-word;
       -webkit-animation:
         type5 2s steps(20, end),
         blink 0.5s step-end infinite alternate;
@@ -353,23 +361,27 @@ form {
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
     }
+
+    @media screen and (max-width: 930px) {
+      .css-typing h2 {
+        font-size: 19px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 930px) {
+    .border-yellow {
+      height: 78vh;
+    }
   }
 
   border-radius: 25px;
   border: 8px solid #072ff7;
   min-width: 250px;
   width: 83vw;
-
-  min-height: 70vh;
   background: #072ff7;
   color: #fcec03;
   font-weight: bold;
-
-  @media screen and (min-width: 930px) {
-    .border-yellow {
-      max-width: 480px;
-    }
-  }
 }
 
 @media screen and (min-width: 930px) {
@@ -559,4 +571,11 @@ section {
   50% {
     border-color: tranparent;
   }
+}
+
+@font-face {
+  font-family: "Calculator";
+  src: url("../../public/fonts/calculator.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
