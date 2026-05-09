@@ -17,15 +17,19 @@ export default function ApartmentSize() {
       calculateSqFt(room.length, room.width),
     );
     const sharedSqFoot = data.rooms
-      .filter((room) => room.shared)
+      .filter((room) => room.type === "shared")
       .map((room) => calculateSqFt(room.length, room.width));
     const yourSpFt = data.rooms
-      .filter((room) => room.yours)
+      .filter((room) => room.type === "yours")
+      .map((room) => calculateSqFt(room.length, room.width));
+    const theirSpFt = data.rooms
+      .filter((room) => room.type === "theirs")
       .map((room) => calculateSqFt(room.length, room.width));
 
     const apartmentSize = calculateTotalSqFt(aptSqFoot);
     const yourSize = calculateTotalSqFt(yourSpFt);
     const sharedSize = calculateTotalSqFt(sharedSqFoot);
+    const theirSize = calculateTotalSqFt(theirSpFt);
 
     const yourPortion = (sharedSize / 2 + yourSize) / apartmentSize;
     const yourShareOfTheRent = data.rent * yourPortion;
@@ -49,6 +53,9 @@ export default function ApartmentSize() {
 
   const clearRooms = () => {
     setIndexes([]);
+    setAptSize(null);
+    setRent(null);
+    setYourSpaceSqFt(null);
   };
 
   return (
@@ -56,11 +63,15 @@ export default function ApartmentSize() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset name="rent" className="rent">
           <label>
-            Rent:
+            Rent $$$:
             <input type="number" {...register("rent", { required: true })} />
           </label>
         </fieldset>
-        <p className="room-title">[Enter room configurations]</p>
+        <div className="add-button">
+          <button type="button" onClick={addRoom}>
+            + Add Room
+          </button>
+        </div>
         {indexes.map((index) => {
           const fieldName = `rooms[${index}]`;
           return (
@@ -84,15 +95,35 @@ export default function ApartmentSize() {
               </label>
               <div className="space">Space:</div>
 
-              <div>
+              <div id="spaceSetting">
                 <label className="room-type">
-                  <input type="checkbox" {...register(`${fieldName}.yours`)} />
-                  Private/yours
+                  <input
+                    type="radio"
+                    name={`${fieldName}.type`}
+                    value="yours"
+                    {...register(`${fieldName}.type`)}
+                  />
+                  yours (private)
                 </label>
 
                 <label className="room-type">
-                  <input type="checkbox" {...register(`${fieldName}.shared`)} />
-                  Shared/public
+                  <input
+                    type="radio"
+                    name={`${fieldName}.type`}
+                    value="shared"
+                    {...register(`${fieldName}.type`)}
+                  />
+                  shared (public)
+                </label>
+
+                <label className="room-type">
+                  <input
+                    type="radio"
+                    name={`${fieldName}.type`}
+                    value="theirs"
+                    {...register(`${fieldName}.type`)}
+                  />
+                  theirs (private)
                 </label>
               </div>
               <label>
@@ -114,33 +145,31 @@ export default function ApartmentSize() {
           );
         })}
         <div>
-          <button type="button" onClick={addRoom}>
-            Add Room
+          <button className="submit" type="button" onClick={clearRooms}>
+            Clear
           </button>
-          <button type="button" onClick={clearRooms}>
-            Clear All
-          </button>
-        </div>
-        <div>
-          <input className="submit-buttom" type="submit" value="Submit" />
+          <input className="submit" type="submit" value="Submit" />
         </div>
       </form>
 
       <div className="results">
-        <div>
-          {aptSize && (
-            <>
-              <h2>
-                Apartment Size is {aptSize} ft<sup>2</sup>
-              </h2>
-              <h2>
-                Your Space is {yourSpaceSqFt} ft<sup>2</sup>
-              </h2>
-              <p>which is around</p>
-              <h3>{(yourSpaceSqFt / aptSize) * 100}%</h3>
-            </>
-          )}
-          {rent !== null && <h2>Your Share of the Rent is ${rent}</h2>}
+        <div className="border-yellow">
+          <div className="css-typing">
+            {aptSize && (
+              <>
+                <h2>
+                  Apartment Size is {aptSize} ft<sup>2</sup>
+                </h2>
+                <h2>
+                  Your Space is {yourSpaceSqFt} ft<sup>2</sup>
+                </h2>
+                <h2>which is around {(yourSpaceSqFt / aptSize) * 100}%</h2>
+              </>
+            )}
+            {rent !== null && (
+              <h2 className="share">Your Share of the Rent is ${rent}</h2>
+            )}
+          </div>
         </div>
       </div>
     </section>
