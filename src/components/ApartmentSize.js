@@ -29,6 +29,8 @@ export default function ApartmentSize() {
     const apartmentSize = calculateTotalSqFt(aptSqFoot);
     const yourSize = calculateTotalSqFt(yourSpFt);
     const sharedSize = calculateTotalSqFt(sharedSqFoot);
+    // TODO: fix this
+    // eslint-disable-next-line no-unused-vars
     const theirSize = calculateTotalSqFt(theirSpFt);
 
     const yourPortion = (sharedSize / 2 + yourSize) / apartmentSize;
