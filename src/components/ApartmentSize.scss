@@ -5,7 +5,6 @@ form {
   border-radius: 25px;
   border: 8px solid #072ff7;
   min-width: 250px;
-  width: 40vw;
   max-width: 480px;
   min-height: 70vh;
   color: #072ff7;
@@ -14,8 +13,25 @@ form {
   .room {
     border: 1.5px solid #072ff7;
     margin-top: 10px;
-    width: 35vw;
-    max-width: 440px;
+  }
+
+  @media screen and (max-width: 930px) {
+    .room {
+      width: 73vw;
+    }
+
+    form {
+      padding-left: 15px;
+      padding-right: 15px;
+      width: 80vw;
+    }
+  }
+
+  @media screen and (min-width: 930px) {
+    .room {
+      width: 35vw;
+      max-width: 440px;
+    }
   }
 
   .rent {
@@ -26,7 +42,6 @@ form {
     label {
       margin: 1rem;
     }
-    max-width: 413px;
   }
 
   fieldset {
@@ -37,6 +52,12 @@ form {
       text-align: left;
       font-size: 24px;
       margin: 2px 25px 2px 2px;
+    }
+
+    @media screen and (max-width: 930px) {
+      label {
+        font-size: 20px;
+      }
     }
 
     #closeButton {
@@ -53,6 +74,13 @@ form {
       border-bottom: 2px solid #072ff7;
     }
 
+    @media screen and (max-width: 930px) {
+      input[type="number"],
+      input[type="text"] {
+        width: 40vw;
+      }
+    }
+
     button {
       background: none;
       color: inherit;
@@ -67,6 +95,12 @@ form {
     .room-type {
       text-transform: lowercase;
       font-size: 16px;
+    }
+    @media screen and (max-width: 930px) {
+      .room-type {
+        text-transform: lowercase;
+        font-size: 14px;
+      }
     }
 
     border: none;
@@ -87,7 +121,7 @@ form {
   .add-button {
     display: flex;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     button {
       margin-right: 1rem;
@@ -95,6 +129,12 @@ form {
         background: #072ff7;
         color: #fcec03;
       }
+    }
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      font-size: 13px;
     }
   }
 
@@ -126,27 +166,151 @@ form {
   }
 }
 
+@media screen and (max-width: 930px) {
+  form {
+    flex-direction: column;
+    row-gap: 0;
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  form {
+    width: 40vw;
+  }
+}
+
 .results {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 4vw;
+
+  max-height: 700px;
 
   .border-yellow {
     width: 97%;
-    height: 100%;
     border-radius: 25px;
     border: 8px solid #fcec03;
     text-align: left;
 
+    .calculator {
+      display: flex;
+      flex-direction: column;
+      /* flex-wrap: wrap; */
+      row-gap: 16px;
+      .four-buttons,
+      .second-buttons {
+        display: flex;
+        justify-content: space-evenly;
+        div {
+          border: 1px solid #fcec03;
+          border-radius: 5px;
+          width: 56px;
+          height: 23px;
+          border-bottom-width: 3px;
+          border-right-width: 3px;
+        }
+      }
+
+      .four-buttons {
+        div:hover {
+          transform: translateY(-1px);
+        }
+
+        &:last-of-type {
+          margin-bottom: 2rem;
+        }
+      }
+      @media screen and (max-width: 930px) {
+        .four-buttons:nth-last-child(n + 3) {
+          display: none;
+        }
+      }
+
+      .second-buttons {
+        row-gap: 20px;
+
+        .calc-row-buttons {
+          display: flex;
+          flex-direction: column-reverse;
+          gap: 20px;
+          height: 10vh;
+          border: none;
+        }
+
+        .calculator-pad {
+          border: none !important;
+          display: inline-flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          align-items: center;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+
+          .arrow-key {
+            width: 3rem;
+            height: 2rem;
+            border-radius: 9px;
+            background: linear-gradient(180deg, #072ff7 0%, #072ff7 100%);
+            border: 2px solid #fcec03;
+            color: #fcec03;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow:
+              inset 0 -3px 0 rgba(0, 0, 0, 0.12),
+              0 4px 0 rgba(0, 0, 0, 0.08);
+            transition:
+              transform 0.15s ease,
+              background 0.15s ease;
+          }
+
+          .arrow-key:hover {
+            transform: translateY(-1px);
+          }
+
+          .arrow-key:active {
+            transform: translateY(1px);
+            box-shadow:
+              inset 0 2px 0 rgba(0, 0, 0, 0.12),
+              0 1px 0 rgba(0, 0, 0, 0.08);
+          }
+
+          .pad-row {
+            display: flex;
+            gap: 0.5rem;
+            border: none !important;
+          }
+
+          .pad-row:nth-child(odd) {
+            justify-content: center;
+          }
+
+          .pad-row:nth-child(even) {
+            justify-content: center;
+            gap: 2.5rem;
+          }
+        }
+      }
+    }
+
     .css-typing {
-      margin: 1.5rem;
+      margin: 0.7rem;
+      margin-bottom: 2rem;
+      border: 2px solid;
+      padding: 10px;
+      padding-bottom: 50px;
+      font-family: "Calculator";
     }
 
     .css-typing h2 {
       border-right: 0.15em solid #fcec03;
-      font-family: "Courier";
-      font-size: 18px;
+      font-family: "Calculator";
+      font-size: 22px;
       white-space: nowrap;
       overflow: hidden;
     }
@@ -174,43 +338,77 @@ form {
       width: 14em;
       opacity: 0;
       -webkit-animation: type3 1s steps(40, end);
-      animation: type3 1s steps(40, end);
-      -webkit-animation-delay: 4s;
-      animation-delay: 4s;
+      animation: type3 1.5s steps(40, end);
+      -webkit-animation-delay: 4.5s;
+      animation-delay: 4.5s;
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
     }
 
     .css-typing .share {
-      width: 20em;
+      width: 23em;
       opacity: 0;
+      white-space: normal;
+      overflow-wrap: break-word;
       -webkit-animation:
         type5 2s steps(20, end),
         blink 0.5s step-end infinite alternate;
       animation:
         type5 2s steps(20, end),
         blink 0.5s step-end infinite alternate;
-      -webkit-animation-delay: 6s;
-      animation-delay: 5s;
+      -webkit-animation-delay: 12.5s;
+      animation-delay: 6.5s;
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
+    }
+
+    @media screen and (max-width: 930px) {
+      .css-typing h2 {
+        font-size: 19px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 930px) {
+    .border-yellow {
+      height: 78vh;
     }
   }
 
   border-radius: 25px;
   border: 8px solid #072ff7;
   min-width: 250px;
-  width: 40vw;
-  max-width: 480px;
-  min-height: 70vh;
+  width: 83vw;
   background: #072ff7;
   color: #fcec03;
   font-weight: bold;
 }
 
+@media screen and (min-width: 930px) {
+  .results {
+    margin-left: 4vw;
+    width: 40vw;
+  }
+}
+
 section {
   margin-top: 20px;
   display: flex;
+}
+
+@media screen and (max-width: 930px) {
+  section {
+    flex-direction: column;
+    row-gap: 3rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  form {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 80vw;
+  }
 }
 
 .submit {
@@ -340,38 +538,6 @@ section {
   }
 }
 
-@keyframes type4 {
-  0% {
-    width: 0;
-  }
-  1% {
-    opacity: 1;
-  }
-  99.9% {
-    border-right: 0.15em solid #fcec03;
-  }
-  100% {
-    opacity: 1;
-    border: none;
-  }
-}
-
-@-webkit-keyframes type4 {
-  0% {
-    width: 0;
-  }
-  1% {
-    opacity: 1;
-  }
-  99.9% {
-    border-right: 0.15em solid #fcec03;
-  }
-  100% {
-    opacity: 1;
-    border: none;
-  }
-}
-
 @keyframes type5 {
   0% {
     width: 0;
@@ -405,4 +571,11 @@ section {
   50% {
     border-color: tranparent;
   }
+}
+
+@font-face {
+  font-family: "Calculator";
+  src: url("../../public/fonts/calculator.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
