@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { calculateSqFt, calculateTotalSqFt } from "../utils/index";
+import { calculateSqFt } from "../utils/index";
 import "./ApartmentSize.scss";
 
 export default function ApartmentSize() {
@@ -8,37 +8,61 @@ export default function ApartmentSize() {
   const [aptSize, setAptSize] = useState(null);
   const [rent, setRent] = useState(null);
   const [yourSpaceSqFt, setYourSpaceSqFt] = useState(null);
+  const [percentageOfApartmentYouUse, setPercentageOfApartmentYouUse] =
+    useState(null);
+  const [resultKey, setResultKey] = useState(0);
 
   const [counter, setCounter] = useState(0);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     const aptSqFoot = data.rooms.map((room) =>
       calculateSqFt(room.length, room.width),
     );
+
     const sharedSqFoot = data.rooms
       .filter((room) => room.type === "shared")
-      .map((room) => calculateSqFt(room.length, room.width));
+      .map((room) => calculateSqFt(room.length, room.width))
+      .reduce((acc, currentValue) => {
+        return acc + currentValue;
+      }, 0);
     const yourSpFt = data.rooms
       .filter((room) => room.type === "yours")
-      .map((room) => calculateSqFt(room.length, room.width));
-    const theirSpFt = data.rooms
+      .map((room) => calculateSqFt(room.length, room.width))
+      .reduce((acc, currentValue) => {
+        return acc + currentValue;
+      }, 0);
+    const theirSqFt = data.rooms
       .filter((room) => room.type === "theirs")
-      .map((room) => calculateSqFt(room.length, room.width));
+      .map((room) => calculateSqFt(room.length, room.width))
+      .reduce((acc, currentValue) => {
+        return acc + currentValue;
+      }, 0);
 
-    const apartmentSize = calculateTotalSqFt(aptSqFoot);
-    const yourSize = calculateTotalSqFt(yourSpFt);
-    const sharedSize = calculateTotalSqFt(sharedSqFoot);
-    // TODO: fix this
-    // eslint-disable-next-line no-unused-vars
-    const theirSize = calculateTotalSqFt(theirSpFt);
+    const apartmentSize = aptSqFoot.reduce((acc, currentValue) => {
+      return acc + currentValue;
+    }, 0);
+    console.log("aptSqFoot: ", aptSqFoot);
+    console.log("apartmentSize: ", apartmentSize);
+    console.log("yourSpFt: ", yourSpFt);
+    console.log("sharedSqFoot: ", sharedSqFoot);
+    console.log("theirSqFt: ", theirSqFt);
+    console.log("data.rent: ", data.rent);
 
-    const yourPortion = (sharedSize / 2 + yourSize) / apartmentSize;
-    const yourShareOfTheRent = data.rent * yourPortion;
+    const yourUsablePortion = sharedSqFoot / 2 + yourSpFt;
+    const percentageOfApartment = yourUsablePortion / apartmentSize;
+    const yourShareOfTheRent = data.rent * percentageOfApartment;
 
-    setYourSpaceSqFt(yourSize.toFixed(2));
+    console.log("yourUsablePortion: ", yourUsablePortion);
+    console.log("yourShareOfTheRent: ", yourShareOfTheRent);
+    console.log("percentageOfApartment: ", percentageOfApartment);
+    console.log("percentageOfApartmentYouUse: ", percentageOfApartmentYouUse);
+
+    setYourSpaceSqFt(yourUsablePortion.toFixed(2));
     setAptSize(apartmentSize.toFixed(2));
+    setPercentageOfApartmentYouUse(percentageOfApartment.toFixed(2));
     setRent(yourShareOfTheRent.toFixed(2));
+    setResultKey((prevKey) => prevKey + 1);
   };
 
   const addRoom = () => {
@@ -58,6 +82,7 @@ export default function ApartmentSize() {
     setAptSize(null);
     setRent(null);
     setYourSpaceSqFt(null);
+    reset({ rent: "" });
   };
 
   return (
@@ -70,6 +95,7 @@ export default function ApartmentSize() {
           </label>
         </fieldset>
         <div className="add-button">
+          <div className="note">* please use feet</div>
           <button type="button" onClick={addRoom}>
             + Add Room
           </button>
@@ -101,9 +127,8 @@ export default function ApartmentSize() {
                 <label className="room-type">
                   <input
                     type="radio"
-                    name={`${fieldName}.type`}
                     value="yours"
-                    {...register(`${fieldName}.type`)}
+                    {...register(`${fieldName}.type`, { required: true })}
                   />
                   yours (private)
                 </label>
@@ -111,9 +136,8 @@ export default function ApartmentSize() {
                 <label className="room-type">
                   <input
                     type="radio"
-                    name={`${fieldName}.type`}
                     value="shared"
-                    {...register(`${fieldName}.type`)}
+                    {...register(`${fieldName}.type`, { required: true })}
                   />
                   shared (public)
                 </label>
@@ -121,9 +145,8 @@ export default function ApartmentSize() {
                 <label className="room-type">
                   <input
                     type="radio"
-                    name={`${fieldName}.type`}
                     value="theirs"
-                    {...register(`${fieldName}.type`)}
+                    {...register(`${fieldName}.type`, { required: true })}
                   />
                   theirs (private)
                 </label>
@@ -156,22 +179,105 @@ export default function ApartmentSize() {
 
       <div className="results">
         <div className="border-yellow">
-          <div className="css-typing">
-            {aptSize && (
-              <>
-                <h2>
-                  Apartment Size is {aptSize} ft<sup>2</sup>
-                </h2>
-                <h2>
-                  Your Space is {yourSpaceSqFt} ft<sup>2</sup>
-                </h2>
-                <h2>which is around {(yourSpaceSqFt / aptSize) * 100}%</h2>
-              </>
-            )}
-            {rent !== null && (
-              <h2 className="share">Your Share of the Rent is ${rent}</h2>
-            )}
-          </div>
+          {aptSize && (
+            <div className="css-typing" key={resultKey}>
+              {aptSize && (
+                <>
+                  <h2>
+                    Apartment Size is {aptSize} ft<sup>2</sup>
+                  </h2>
+                  <h2>
+                    Your Space is {yourSpaceSqFt} ft<sup>2</sup>
+                  </h2>
+                  <h2>
+                    which is around{" "}
+                    {(percentageOfApartmentYouUse * 100).toFixed(0)}%
+                  </h2>
+                </>
+              )}
+              {rent !== null && (
+                <h2 className="share">Your Share of the Rent is ${rent}</h2>
+              )}
+            </div>
+          )}
+          {aptSize && (
+            <div className="calculator">
+              <div className="four-buttons">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div className="second-buttons">
+                <div className="calc-row-buttons">
+                  <div></div>
+                  <div></div>
+                </div>
+                <div className="calc-row-buttons">
+                  <div></div>
+                  <div></div>
+                </div>
+                <div style={{ border: "none" }}>
+                  <div className="calculator-pad">
+                    <div className="pad-row">
+                      <button type="button" className="arrow-key arrow-up">
+                        ↑
+                      </button>
+                    </div>
+                    <div className="pad-row">
+                      <button type="button" className="arrow-key arrow-left">
+                        ←
+                      </button>
+                      <button type="button" className="arrow-key arrow-right">
+                        →
+                      </button>
+                    </div>
+                    <div className="pad-row">
+                      <button type="button" className="arrow-key arrow-down">
+                        ↓
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="four-buttons">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div className="four-buttons">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div className="four-buttons">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div className="four-buttons">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div className="four-buttons">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div className="four-buttons">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
