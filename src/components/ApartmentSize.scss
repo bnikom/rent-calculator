@@ -5,7 +5,6 @@ form {
   border-radius: 25px;
   border: 8px solid #072ff7;
   min-width: 250px;
-  width: 40vw;
   max-width: 480px;
   min-height: 70vh;
   color: #072ff7;
@@ -14,8 +13,25 @@ form {
   .room {
     border: 1.5px solid #072ff7;
     margin-top: 10px;
-    width: 35vw;
-    max-width: 440px;
+  }
+
+  @media screen and (max-width: 930px) {
+    .room {
+      width: 73vw;
+    }
+
+    form {
+      padding-left: 15px;
+      padding-right: 15px;
+      width: 80vw;
+    }
+  }
+
+  @media screen and (min-width: 930px) {
+    .room {
+      width: 35vw;
+      max-width: 440px;
+    }
   }
 
   .rent {
@@ -39,6 +55,12 @@ form {
       margin: 2px 25px 2px 2px;
     }
 
+    @media screen and (max-width: 930px) {
+      label {
+        font-size: 20px;
+      }
+    }
+
     #closeButton {
       position: relative;
       right: -7px;
@@ -51,6 +73,13 @@ form {
       background: transparent;
       border: none;
       border-bottom: 2px solid #072ff7;
+    }
+
+    @media screen and (max-width: 930px) {
+      input[type="number"],
+      input[type="text"] {
+        width: 40vw;
+      }
     }
 
     button {
@@ -67,6 +96,12 @@ form {
     .room-type {
       text-transform: lowercase;
       font-size: 16px;
+    }
+    @media screen and (max-width: 930px) {
+      .room-type {
+        text-transform: lowercase;
+        font-size: 14px;
+      }
     }
 
     border: none;
@@ -132,16 +167,30 @@ form {
   }
 }
 
+@media screen and (max-width: 930px) {
+  form {
+    flex-direction: column;
+    row-gap: 0;
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  form {
+    width: 40vw;
+  }
+}
+
 .results {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 4vw;
+
   max-height: 700px;
 
   .border-yellow {
     width: 97%;
-    height: 100%;
+    height: 100vh;
     border-radius: 25px;
     border: 8px solid #fcec03;
     text-align: left;
@@ -150,7 +199,7 @@ form {
       display: flex;
       flex-direction: column;
       /* flex-wrap: wrap; */
-      row-gap: 20px;
+      row-gap: 17px;
       .four-buttons,
       .second-buttons {
         display: flex;
@@ -166,6 +215,10 @@ form {
       .four-buttons {
         div:hover {
           transform: translateY(-1px);
+        }
+
+        &:last-of-type {
+          margin-bottom: 2rem;
         }
       }
 
@@ -279,9 +332,9 @@ form {
       width: 14em;
       opacity: 0;
       -webkit-animation: type3 1s steps(40, end);
-      animation: type3 1.3s steps(40, end);
-      -webkit-animation-delay: 4s;
-      animation-delay: 4s;
+      animation: type3 1.5s steps(40, end);
+      -webkit-animation-delay: 4.5s;
+      animation-delay: 4.5s;
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
     }
@@ -295,8 +348,8 @@ form {
       animation:
         type5 2s steps(20, end),
         blink 0.5s step-end infinite alternate;
-      -webkit-animation-delay: 6s;
-      animation-delay: 5s;
+      -webkit-animation-delay: 12.5s;
+      animation-delay: 6.5s;
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
     }
@@ -305,17 +358,45 @@ form {
   border-radius: 25px;
   border: 8px solid #072ff7;
   min-width: 250px;
-  width: 40vw;
-  max-width: 480px;
+  width: 83vw;
+
   min-height: 70vh;
   background: #072ff7;
   color: #fcec03;
   font-weight: bold;
+
+  @media screen and (min-width: 930px) {
+    .border-yellow {
+      max-width: 480px;
+    }
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .results {
+    margin-left: 4vw;
+    width: 40vw;
+  }
 }
 
 section {
   margin-top: 20px;
   display: flex;
+}
+
+@media screen and (max-width: 930px) {
+  section {
+    flex-direction: column;
+    row-gap: 3rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  form {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 80vw;
+  }
 }
 
 .submit {
