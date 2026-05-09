@@ -1,24 +1,28 @@
-
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   border-radius: 25px;
-  border: 2px solid black;
-  width: 413px;
+  border: 8px solid #072ff7;
+  min-width: 250px;
+  width: 40vw;
+  max-width: 480px;
+  min-height: 70vh;
+  color: #072ff7;
+  font-weight: bold;
 
-  .room{
-    border: 1.5px solid blue;
-    background: lightgoldenrodyellow;
-    margin: 15px;
-    padding: 2rem;
+  .room {
+    border: 1.5px solid #072ff7;
+    margin-top: 10px;
+    width: 35vw;
+    max-width: 440px;
   }
 
   .rent {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     width: 100%;
     padding: 0;
+    align-self: flex-start;
     label {
       margin: 1rem;
     }
@@ -32,18 +36,21 @@ form {
     label {
       text-align: left;
       font-size: 24px;
-      margin: 2px;
+      margin: 2px 25px 2px 2px;
     }
 
     #closeButton {
       position: relative;
-      top: -20px;
-      right: -20px;
+      right: -7px;
     }
 
-    input[type="number"], input[type="text"] {
-      font-size:24px;
+    input[type="number"],
+    input[type="text"] {
+      font-size: 20px;
       float: right;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #072ff7;
     }
 
     button {
@@ -53,34 +60,58 @@ form {
       padding: 0;
       font: inherit;
       outline: inherit;
-      float: right;  
+      float: right;
       width: 1rem;
     }
 
-    #nameLabel {
-      margin-top: 17px;
+    .room-type {
+      text-transform: lowercase;
+      font-size: 16px;
     }
 
-    max-width: 400px;
     border: none;
     display: flex;
     flex-direction: column;
   }
 
-  input[type="submit"] {
-    font-size:24px;
-    box-sizing: border-box;
-    margin: 10px;
-    border-radius: 5px;
-    font-family: 'DM Sans';
-    border: 1.5px solid black;
+  .space {
+    font-size: 22px;
+    text-align: left;
+  }
+
+  #spaceSetting {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .add-button {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    button {
+      margin-right: 1rem;
+      &:hover {
+        background: #072ff7;
+        color: #fcec03;
+      }
+    }
+  }
+
+  .room-title {
+    margin-top: 0px;
+    font-size: 18px;
+    margin-left: 2rem;
   }
 
   button {
     border-radius: 5px;
-    font-family: 'DM Sans';
-    border: 1.5px solid black;
+    font-family: "DM Sans";
+    border: 2px solid #072ff7;
     margin-right: 3px;
+    background: transparent;
+    color: #072ff7;
+    cursor: pointer;
   }
 
   p {
@@ -97,10 +128,281 @@ form {
 
 .results {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    div {
-  display: block;
-  text-align: left;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 4vw;
+
+  .border-yellow {
+    width: 97%;
+    height: 100%;
+    border-radius: 25px;
+    border: 8px solid #fcec03;
+    text-align: left;
+
+    .css-typing {
+      margin: 1.5rem;
+    }
+
+    .css-typing h2 {
+      border-right: 0.15em solid #fcec03;
+      font-family: "Courier";
+      font-size: 18px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .css-typing h2:nth-child(1) {
+      width: 25em;
+      -webkit-animation: type 2s steps(40, end);
+      animation: type 2s steps(40, end);
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    .css-typing h2:nth-child(2) {
+      width: 16em;
+      opacity: 0;
+      -webkit-animation: type2 2s steps(40, end);
+      animation: type2 2s steps(40, end);
+      -webkit-animation-delay: 2s;
+      animation-delay: 2s;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    .css-typing h2:nth-child(3) {
+      width: 14em;
+      opacity: 0;
+      -webkit-animation: type3 1s steps(40, end);
+      animation: type3 1s steps(40, end);
+      -webkit-animation-delay: 4s;
+      animation-delay: 4s;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    .css-typing .share {
+      width: 20em;
+      opacity: 0;
+      -webkit-animation:
+        type5 2s steps(20, end),
+        blink 0.5s step-end infinite alternate;
+      animation:
+        type5 2s steps(20, end),
+        blink 0.5s step-end infinite alternate;
+      -webkit-animation-delay: 6s;
+      animation-delay: 5s;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  border-radius: 25px;
+  border: 8px solid #072ff7;
+  min-width: 250px;
+  width: 40vw;
+  max-width: 480px;
+  min-height: 70vh;
+  background: #072ff7;
+  color: #fcec03;
+  font-weight: bold;
 }
+
+section {
+  margin-top: 20px;
+  display: flex;
+}
+
+.submit {
+  font-size: 24px;
+  box-sizing: border-box;
+  margin: 10px;
+  border-radius: 5px;
+  font-family: "DM Sans";
+  border: 3px solid #072ff7;
+  margin-right: 3px;
+  background: #072ff7;
+  color: #fcec03;
+  cursor: pointer;
+
+  &:hover {
+    background: transparent;
+    color: #072ff7;
+  }
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #fcec03;
+  }
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@-webkit-keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@-webkit-keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@-webkit-keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type4 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@-webkit-keyframes type4 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: 0.15em solid #fcec03;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type5 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes type5 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    border-color: tranparent;
+  }
 }
