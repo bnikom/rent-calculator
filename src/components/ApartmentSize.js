@@ -32,31 +32,14 @@ export default function ApartmentSize() {
       .reduce((acc, currentValue) => {
         return acc + currentValue;
       }, 0);
-    const theirSqFt = data.rooms
-      .filter((room) => room.type === "theirs")
-      .map((room) => calculateSqFt(room.length, room.width))
-      .reduce((acc, currentValue) => {
-        return acc + currentValue;
-      }, 0);
 
     const apartmentSize = aptSqFoot.reduce((acc, currentValue) => {
       return acc + currentValue;
     }, 0);
-    console.log("aptSqFoot: ", aptSqFoot);
-    console.log("apartmentSize: ", apartmentSize);
-    console.log("yourSpFt: ", yourSpFt);
-    console.log("sharedSqFoot: ", sharedSqFoot);
-    console.log("theirSqFt: ", theirSqFt);
-    console.log("data.rent: ", data.rent);
 
     const yourUsablePortion = sharedSqFoot / 2 + yourSpFt;
     const percentageOfApartment = yourUsablePortion / apartmentSize;
     const yourShareOfTheRent = data.rent * percentageOfApartment;
-
-    console.log("yourUsablePortion: ", yourUsablePortion);
-    console.log("yourShareOfTheRent: ", yourShareOfTheRent);
-    console.log("percentageOfApartment: ", percentageOfApartment);
-    console.log("percentageOfApartmentYouUse: ", percentageOfApartmentYouUse);
 
     setYourSpaceSqFt(yourUsablePortion.toFixed(2));
     setAptSize(apartmentSize.toFixed(2));
