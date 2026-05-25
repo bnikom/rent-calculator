@@ -15,16 +15,10 @@ form {
     margin-top: 10px;
   }
 
-  @media screen and (max-width: 930px) {
-    .room {
-      width: 73vw;
-    }
-
-    form {
-      padding-left: 15px;
-      padding-right: 15px;
-      width: 80vw;
-    }
+  .error {
+    margin: 0;
+    font-size: 13px;
+    text-align: right;
   }
 
   @media screen and (min-width: 930px) {
@@ -43,6 +37,10 @@ form {
       padding-left: 15px;
       padding-right: 15px;
       width: 80vw;
+    }
+
+    .error {
+      float: right !important;
     }
   }
 
@@ -135,6 +133,29 @@ form {
   #spaceSetting {
     display: grid;
     grid-template-columns: auto auto;
+    grid-template-areas:
+      "yours shared"
+      "theirs ."
+      ". error";
+    gap: 0.5rem;
+
+    .area-yours {
+      grid-area: yours;
+    }
+    .area-shared {
+      grid-area: shared;
+    }
+    .area-theirs {
+      grid-area: theirs;
+    }
+    .error {
+      grid-area: error;
+      justify-self: end;
+      margin: 0;
+      font-size: 13px;
+      text-align: right;
+      margin: 2px 25px 2px 2px;
+    }
   }
 
   .add-button {
@@ -182,12 +203,6 @@ form {
     margin-left: 1rem;
     text-align: left;
     margin-top: 2rem;
-  }
-
-  .error {
-    margin: 0;
-    font-size: 13px;
-    text-align: right;
   }
 }
 

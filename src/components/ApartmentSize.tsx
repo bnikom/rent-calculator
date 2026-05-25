@@ -125,38 +125,50 @@ export default function ApartmentSize(): JSX.Element {
               <div className="space">Space:</div>
 
               <div id="spaceSetting">
-                <label className="room-type">
+                <label className="room-type area-yours">
                   <input
                     type="radio"
                     value="yours"
                     {...register(`${fieldName}.type` as any, {
-                      required: true,
+                      required: "This input is required.",
                     })}
                   />
                   yours (private)
                 </label>
 
-                <label className="room-type">
+                <label className="room-type area-shared">
                   <input
                     type="radio"
                     value="shared"
                     {...register(`${fieldName}.type` as any, {
-                      required: true,
+                      required: "This input is required.",
                     })}
                   />
                   shared (public)
                 </label>
 
-                <label className="room-type">
+                <label className="room-type area-theirs">
                   <input
                     type="radio"
                     value="theirs"
                     {...register(`${fieldName}.type` as any, {
-                      required: true,
+                      required: "This input is required.",
                     })}
                   />
                   theirs (private)
                 </label>
+                <ErrorMessage
+                  errors={errors}
+                  name={`${fieldName}.type`}
+                  render={({ messages }) =>
+                    messages &&
+                    Object.entries(messages).map(([type, message]) => (
+                      <p key={type} className="error">
+                        {message}
+                      </p>
+                    ))
+                  }
+                />
               </div>
               <label>
                 Length:
@@ -172,6 +184,18 @@ export default function ApartmentSize(): JSX.Element {
                       },
                     } as any,
                   )}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name={`${fieldName}.length`}
+                  render={({ messages }) =>
+                    messages &&
+                    Object.entries(messages).map(([type, message]) => (
+                      <p key={type} className="error">
+                        {message}
+                      </p>
+                    ))
+                  }
                 />
               </label>
 
@@ -189,6 +213,18 @@ export default function ApartmentSize(): JSX.Element {
                       },
                     } as any,
                   )}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name={`${fieldName}.width`}
+                  render={({ messages }) =>
+                    messages &&
+                    Object.entries(messages).map(([type, message]) => (
+                      <p key={type} className="error">
+                        {message}
+                      </p>
+                    ))
+                  }
                 />
               </label>
             </fieldset>
