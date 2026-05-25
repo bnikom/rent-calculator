@@ -68,7 +68,7 @@ export default function ApartmentSize(): JSX.Element {
                 },
               })}
             />
-            <ErrorMessage
+            {/* <ErrorMessage
               errors={errors}
               name="rent"
               render={({ message, messages }) => {
@@ -84,7 +84,7 @@ export default function ApartmentSize(): JSX.Element {
                     )
                   : null;
               }}
-            />
+            /> */}
           </label>
         </fieldset>
         <div className="add-button">
