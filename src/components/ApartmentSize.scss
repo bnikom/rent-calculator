@@ -380,6 +380,18 @@ form {
       animation-fill-mode: forwards;
     }
 
+    .css-typing h2.empty {
+      display: inline-block;
+      width: auto;
+      opacity: 1;
+      border-right: 0.15em solid #fcec03;
+      white-space: nowrap;
+      overflow: visible;
+      padding-right: 0.5em;
+      -webkit-animation: blink 0.7s infinite;
+      animation: blink 0.7s infinite;
+    }
+
     @media screen and (max-width: 930px) {
       .css-typing h2 {
         font-size: 19px;
