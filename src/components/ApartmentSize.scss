@@ -13,17 +13,18 @@ form {
   .room {
     border: 1.5px solid #072ff7;
     margin-top: 10px;
+    width: 35vw;
   }
 
   .error {
     margin: 0;
     font-size: 13px;
     text-align: right;
+    float: right;
   }
 
   @media screen and (min-width: 930px) {
     .room {
-      width: 35vw;
       max-width: 440px;
     }
   }
@@ -37,10 +38,6 @@ form {
       padding-left: 15px;
       padding-right: 15px;
       width: 80vw;
-    }
-
-    .error {
-      float: right !important;
     }
   }
 
