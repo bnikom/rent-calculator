@@ -19,10 +19,20 @@ export default function ApartmentSize(): JSX.Element {
     handleSubmit,
     reset,
     control,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<FormValues>({ criteriaMode: "all" });
 
   const onSubmit = (data: FormValues) => {
+    if (!data.rooms || data.rooms.length === 0) {
+      setError("rooms", {
+        type: "required",
+        message: "Add at least 1 room before submitting.",
+      });
+      return;
+    }
+
     const aptSqFoot = calculateRoomsSqFt(data.rooms || []);
     const sharedSqFoot = calculateTypeSqFt(data.rooms || [], "shared");
     const yourSqFt = calculateTypeSqFt(data.rooms || [], "yours");
@@ -49,6 +59,7 @@ export default function ApartmentSize(): JSX.Element {
     setAptSize(null);
     setRent(null);
     setYourSpaceSqFt(null);
+    clearErrors("rooms");
     reset({ rent: null });
   };
 
@@ -86,18 +97,20 @@ export default function ApartmentSize(): JSX.Element {
           <div className="note">* please use feet</div>
           <button
             type="button"
-            onClick={() =>
+            onClick={() => {
+              clearErrors("rooms");
               append({
                 name: "",
                 length: undefined,
                 width: undefined,
                 type: undefined,
-              })
-            }
+              });
+            }}
           >
             + Add Room
           </button>
         </div>
+
         {fields.map((item, index) => {
           const fieldName = `rooms[${index}]`;
           return (
@@ -236,6 +249,13 @@ export default function ApartmentSize(): JSX.Element {
           </button>
           <input className="submit" type="submit" value="Submit" />
         </div>
+        <ErrorMessage
+          errors={errors}
+          name="rooms"
+          render={({ message }) =>
+            message ? <p className="error room-error">{message}</p> : null
+          }
+        />
       </form>
 
       <div className="results">
