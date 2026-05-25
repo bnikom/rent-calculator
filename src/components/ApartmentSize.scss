@@ -34,6 +34,25 @@ form {
     }
   }
 
+  @media screen and (max-width: 930px) {
+    .room {
+      width: 73vw;
+    }
+
+    form {
+      padding-left: 15px;
+      padding-right: 15px;
+      width: 80vw;
+    }
+  }
+
+  @media screen and (min-width: 930px) {
+    .room {
+      width: 35vw;
+      max-width: 440px;
+    }
+  }
+
   .rent {
     margin-top: 0.5rem;
     width: 100%;
@@ -133,15 +152,15 @@ form {
 
     div {
       align-self: center;
-      margin-left: 1em;
       font-size: 13px;
+      margin-left: 1em;
     }
   }
 
   .room-title {
     margin-top: 0px;
     font-size: 18px;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
   }
 
   button {
@@ -184,7 +203,6 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   max-height: 700px;
 
   .border-yellow {
@@ -303,7 +321,7 @@ form {
       margin-bottom: 2rem;
       border: 2px solid;
       padding: 10px;
-      padding-bottom: 50px;
+      height: 22vh;
       font-family: "Calculator";
     }
 
@@ -382,6 +400,13 @@ form {
   background: #072ff7;
   color: #fcec03;
   font-weight: bold;
+}
+
+@media screen and (min-width: 930px) {
+  .results {
+    margin-left: 4vw;
+    width: 40vw;
+  }
 }
 
 @media screen and (min-width: 930px) {
