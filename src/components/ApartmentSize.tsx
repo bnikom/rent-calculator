@@ -26,6 +26,7 @@ export default function ApartmentSize(): JSX.Element {
     const aptSqFoot = calculateRoomsSqFt(data.rooms || []);
     const sharedSqFoot = calculateTypeSqFt(data.rooms || [], "shared");
     const yourSqFt = calculateTypeSqFt(data.rooms || [], "yours");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const theirSqFt = calculateTypeSqFt(data.rooms || [], "theirs");
 
     const yourUsablePortion = sharedSqFoot / 2 + yourSqFt;
