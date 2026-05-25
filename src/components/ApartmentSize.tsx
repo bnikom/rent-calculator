@@ -68,23 +68,6 @@ export default function ApartmentSize(): JSX.Element {
                 },
               })}
             />
-            {/* <ErrorMessage
-              errors={errors}
-              name="rent"
-              render={({ message, messages }) => {
-                const errorMessages =
-                  messages || (message ? { message } : undefined);
-                return errorMessages
-                  ? Object.entries(errorMessages).map(
-                      ([type, text]: [string, string]) => (
-                        <p key={type} className="error-msg">
-                          {text}
-                        </p>
-                      ),
-                    )
-                  : null;
-              }}
-            /> */}
           </label>
         </fieldset>
         <div className="add-button">
