@@ -4,7 +4,7 @@ import type { Path } from "react-hook-form";
 import { calculateTypeSqFt, calculateRoomsSqFt } from "../utils/utils";
 import type { FormValues } from "../utils/utils";
 import "./ApartmentSize.scss";
-// import { ErrorMessage } from "@hookform/error-message";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function ApartmentSize(): JSX.Element {
   const [aptSize, setAptSize] = useState<string | null>(null);
@@ -19,10 +19,20 @@ export default function ApartmentSize(): JSX.Element {
     handleSubmit,
     reset,
     control,
-    // formState: { errors },
+    setError,
+    clearErrors,
+    formState: { errors },
   } = useForm<FormValues>({ criteriaMode: "all" });
 
   const onSubmit = (data: FormValues) => {
+    if (!data.rooms || data.rooms.length === 0) {
+      setError("rooms", {
+        type: "required",
+        message: "Add at least 1 room before submitting.",
+      });
+      return;
+    }
+
     const aptSqFoot = calculateRoomsSqFt(data.rooms || []);
     const sharedSqFoot = calculateTypeSqFt(data.rooms || [], "shared");
     const yourSqFt = calculateTypeSqFt(data.rooms || [], "yours");
@@ -49,6 +59,7 @@ export default function ApartmentSize(): JSX.Element {
     setAptSize(null);
     setRent(null);
     setYourSpaceSqFt(null);
+    clearErrors("rooms");
     reset({ rent: null });
   };
 
@@ -68,24 +79,38 @@ export default function ApartmentSize(): JSX.Element {
                 },
               })}
             />
+            <ErrorMessage
+              errors={errors}
+              name="rent"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type} className="error">
+                    {message}
+                  </p>
+                ))
+              }
+            />
           </label>
         </fieldset>
         <div className="add-button">
           <div className="note">* please use feet</div>
           <button
             type="button"
-            onClick={() =>
+            onClick={() => {
+              clearErrors("rooms");
               append({
                 name: "",
                 length: undefined,
                 width: undefined,
                 type: undefined,
-              })
-            }
+              });
+            }}
           >
             + Add Room
           </button>
         </div>
+
         {fields.map((item, index) => {
           const fieldName = `rooms[${index}]`;
           return (
@@ -113,38 +138,50 @@ export default function ApartmentSize(): JSX.Element {
               <div className="space">Space:</div>
 
               <div id="spaceSetting">
-                <label className="room-type">
+                <label className="room-type area-yours">
                   <input
                     type="radio"
                     value="yours"
                     {...register(`${fieldName}.type` as any, {
-                      required: true,
+                      required: "This input is required.",
                     })}
                   />
                   yours (private)
                 </label>
 
-                <label className="room-type">
+                <label className="room-type area-shared">
                   <input
                     type="radio"
                     value="shared"
                     {...register(`${fieldName}.type` as any, {
-                      required: true,
+                      required: "This input is required.",
                     })}
                   />
                   shared (public)
                 </label>
 
-                <label className="room-type">
+                <label className="room-type area-theirs">
                   <input
                     type="radio"
                     value="theirs"
                     {...register(`${fieldName}.type` as any, {
-                      required: true,
+                      required: "This input is required.",
                     })}
                   />
                   theirs (private)
                 </label>
+                <ErrorMessage
+                  errors={errors}
+                  name={`${fieldName}.type`}
+                  render={({ messages }) =>
+                    messages &&
+                    Object.entries(messages).map(([type, message]) => (
+                      <p key={type} className="error">
+                        {message}
+                      </p>
+                    ))
+                  }
+                />
               </div>
               <label>
                 Length:
@@ -160,6 +197,18 @@ export default function ApartmentSize(): JSX.Element {
                       },
                     } as any,
                   )}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name={`${fieldName}.length`}
+                  render={({ messages }) =>
+                    messages &&
+                    Object.entries(messages).map(([type, message]) => (
+                      <p key={type} className="error">
+                        {message}
+                      </p>
+                    ))
+                  }
                 />
               </label>
 
@@ -178,6 +227,18 @@ export default function ApartmentSize(): JSX.Element {
                     } as any,
                   )}
                 />
+                <ErrorMessage
+                  errors={errors}
+                  name={`${fieldName}.width`}
+                  render={({ messages }) =>
+                    messages &&
+                    Object.entries(messages).map(([type, message]) => (
+                      <p key={type} className="error">
+                        {message}
+                      </p>
+                    ))
+                  }
+                />
               </label>
             </fieldset>
           );
@@ -188,6 +249,13 @@ export default function ApartmentSize(): JSX.Element {
           </button>
           <input className="submit" type="submit" value="Submit" />
         </div>
+        <ErrorMessage
+          errors={errors}
+          name="rooms"
+          render={({ message }) =>
+            message ? <p className="error room-error">{message}</p> : null
+          }
+        />
       </form>
 
       <div className="results">
