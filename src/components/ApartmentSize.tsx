@@ -4,7 +4,7 @@ import type { Path } from "react-hook-form";
 import { calculateTypeSqFt, calculateRoomsSqFt } from "../utils/utils";
 import type { FormValues } from "../utils/utils";
 import "./ApartmentSize.scss";
-import { ErrorMessage } from "@hookform/error-message";
+// import { ErrorMessage } from "@hookform/error-message";
 
 export default function ApartmentSize(): JSX.Element {
   const [aptSize, setAptSize] = useState<string | null>(null);
@@ -19,7 +19,7 @@ export default function ApartmentSize(): JSX.Element {
     handleSubmit,
     reset,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormValues>({ criteriaMode: "all" });
 
   const onSubmit = (data: FormValues) => {
