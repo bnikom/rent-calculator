@@ -331,10 +331,10 @@ form {
       font-size: 22px;
       white-space: nowrap;
       overflow: hidden;
+      width: 32vw;
     }
 
     .css-typing h2:nth-child(1) {
-      width: 25em;
       -webkit-animation: type 2s steps(40, end);
       animation: type 2s steps(40, end);
       -webkit-animation-fill-mode: forwards;
@@ -342,7 +342,6 @@ form {
     }
 
     .css-typing h2:nth-child(2) {
-      width: 16em;
       opacity: 0;
       -webkit-animation: type2 2s steps(40, end);
       animation: type2 2s steps(40, end);
@@ -353,7 +352,6 @@ form {
     }
 
     .css-typing h2:nth-child(3) {
-      width: 14em;
       opacity: 0;
       -webkit-animation: type3 1s steps(40, end);
       animation: type3 1.5s steps(40, end);
@@ -364,9 +362,8 @@ form {
     }
 
     .css-typing .share {
-      width: 23em;
+      width: 32vw;
       opacity: 0;
-      white-space: normal;
       overflow-wrap: break-word;
       -webkit-animation:
         type5 2s steps(20, end),
