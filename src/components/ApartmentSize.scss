@@ -34,6 +34,25 @@ form {
     }
   }
 
+  @media screen and (max-width: 930px) {
+    .room {
+      width: 73vw;
+    }
+
+    form {
+      padding-left: 15px;
+      padding-right: 15px;
+      width: 80vw;
+    }
+  }
+
+  @media screen and (min-width: 930px) {
+    .room {
+      width: 35vw;
+      max-width: 440px;
+    }
+  }
+
   .rent {
     margin-top: 0.5rem;
     width: 100%;
@@ -141,7 +160,7 @@ form {
   .room-title {
     margin-top: 0px;
     font-size: 18px;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
   }
 
   button {
@@ -303,7 +322,7 @@ form {
       margin-bottom: 2rem;
       border: 2px solid;
       padding: 10px;
-      padding-bottom: 50px;
+      padding-bottom: 140px;
       font-family: "Calculator";
     }
 
