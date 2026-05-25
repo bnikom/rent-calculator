@@ -207,6 +207,7 @@ form {
 
   .border-yellow {
     width: 97%;
+    height: 100vh;
     border-radius: 25px;
     border: 8px solid #fcec03;
     text-align: left;
@@ -215,7 +216,7 @@ form {
       display: flex;
       flex-direction: column;
       /* flex-wrap: wrap; */
-      row-gap: 16px;
+      row-gap: 17px;
       .four-buttons,
       .second-buttons {
         display: flex;
@@ -354,9 +355,9 @@ form {
       width: 14em;
       opacity: 0;
       -webkit-animation: type3 1s steps(40, end);
-      animation: type3 1.3s steps(40, end);
-      -webkit-animation-delay: 4s;
-      animation-delay: 4s;
+      animation: type3 1.5s steps(40, end);
+      -webkit-animation-delay: 4.5s;
+      animation-delay: 4.5s;
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
     }
@@ -398,6 +399,19 @@ form {
   background: #072ff7;
   color: #fcec03;
   font-weight: bold;
+
+  @media screen and (min-width: 930px) {
+    .border-yellow {
+      max-width: 480px;
+    }
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .results {
+    margin-left: 4vw;
+    width: 40vw;
+  }
 }
 
 @media screen and (min-width: 930px) {
