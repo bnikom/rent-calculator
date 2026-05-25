@@ -183,6 +183,12 @@ form {
     text-align: left;
     margin-top: 2rem;
   }
+
+  .error {
+    margin: 0;
+    font-size: 13px;
+    text-align: right;
+  }
 }
 
 @media screen and (max-width: 930px) {
